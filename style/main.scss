@@ -21,6 +21,18 @@ $game-container-background: #bbada0;
 
 $transition-speed: 100ms;
 
+@function pow($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  }
+
+  @return $value;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -40,11 +52,13 @@ body {
 }
 
 h1.title {
-  font-size: 80px;
-  font-weight: bold;
-  margin: 0;
+  width: 107px;
+  height: 107px;
+  background-size: 107px;
+  background-image: url(../images/k11.png);
   display: block;
   float: left;
+
 }
 
 @include keyframes(move-up) {
@@ -288,11 +302,28 @@ hr {
     z-index: 2;
   }
 
+ 
+
+  @for $i from 1 through 11 {
+    $number: pow(2, $i); 
+    
+    .tile-#{$number} {
+      background-image: url(../images/k#{$i}.png);
+    }
+  }
+
+
   .tile {
+    background-size: 107px;
+
     &, .tile-inner {
       width: ceil($tile-size);
       height: ceil($tile-size);
       line-height: ceil($tile-size);
+    }
+
+    .tile-inner {
+      display: none;
     }
 
     // Build position classes
@@ -491,8 +522,12 @@ hr {
   }
 
   h1.title {
-    font-size: 27px;
-    margin-top: 15px;
+    width: 107px;
+    height: 107px;
+    background-size: 107px;
+    background-image: url(../images/k11.png);
+    display: block;
+    float: left;
   }
 
   .container {
